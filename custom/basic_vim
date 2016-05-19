@@ -1,0 +1,48 @@
+filetype indent on
+syntax on
+filetype plugin indent on
+set t_Co=256
+
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+set number
+set ignorecase
+set smartcase
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set nostartofline
+set ruler
+set laststatus=2
+set cmdheight=2
+set pastetoggle=<F11>
+set nocompatible
+set backspace=indent,eol,start
+
+call pathogen#infect()
+call pathogen#helptags()
+
+
+let mapleader = ","
+nmap <leader>ne :NERDTree<cr>
+"navigate between buffers using F2
+:nnoremap <F2> :buffers<CR>:buffer<Space>
+
+let g:windowswap_map_keys = 0 "prevent default bindings
+nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+
+
+highlight Normal term=none cterm=none ctermfg=White ctermbg=Black gui=none guifg=White guibg=Black
+highlight DiffAdd cterm=bold ctermfg=88 ctermbg=none gui=none guifg=fg guibg=Blue
+highlight DiffDelete cterm=bold ctermfg=fg ctermbg=18 gui=none guifg=fg guibg=Blue
+highlight DiffChange cterm=bold ctermfg=fg ctermbg=22 gui=none guifg=fg guibg=Blue
+highlight DiffText cterm=bold ctermfg=bg ctermbg=White gui=none guifg=bg guibg=White

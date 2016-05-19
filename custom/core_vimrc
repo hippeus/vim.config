@@ -1,0 +1,146 @@
+" Global variable which holds the path to my customization files
+" You'll need to edit this so it matches your system
+let g:VIM_CUSTOM = "/home/witcher/.vim/custom/"
+
+set visualbell
+set background=dark
+set tabstop=4
+set showmatch
+set showcmd
+set cmdheight=2
+set autowrite
+set number
+set ignorecase
+set smartcase
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set nostartofline
+set ruler
+set laststatus=2
+set pastetoggle=<F11>
+set nocompatible
+set backspace=indent,eol,start
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"                 Color scheme                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Some custom color modifications.  reference :help highlight and :help cterm
+highlight ModeMsg cterm=bold ctermfg=2 ctermbg=black	" set mode message ( --INSERT-- ) to green
+highlight StatusLine ctermfg=7 ctermbg=9		" set the active statusline to black on white
+highlight StatusLineNC ctermfg=8 ctermbg=9		" set inactive statusline to black on grey
+syntax on
+filetype plugin indent on
+set t_Co=256
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"				Common part						 "
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+call pathogen#infect()
+call pathogen#helptags()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"              Key mappings		                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+let mapleader = ","
+
+nmap <leader>ne :NERDTree<cr>
+map <leader><TAB> <ESC>
+map! <leader><TAB> <ESC>
+
+"navigate between buffers using F12
+":nnoremap <F12> :buffers<CR>:buffer<Space> 
+"let g:windowswap_map_keys = 0 "prevent default bindings
+"nnoremap <silent> <leader>yw :call WindowSwap#MarkWindowSwap()<CR>
+"nnoremap <silent> <leader>pw :call WindowSwap#DoWindowSwap()<CR>
+"nnoremap <silent> <leader>ww :call WindowSwap#EasyWindowSwap()<CR>
+
+highlight Normal term=none cterm=none ctermfg=White ctermbg=Black gui=none guifg=White guibg=Black
+highlight DiffAdd cterm=bold ctermfg=88 ctermbg=none gui=none guifg=fg guibg=Blue
+highlight DiffDelete cterm=bold ctermfg=fg ctermbg=18 gui=none guifg=fg guibg=Blue
+highlight DiffChange cterm=bold ctermfg=fg ctermbg=22 gui=none guifg=fg guibg=Blue
+highlight DiffText cterm=bold ctermfg=bg ctermbg=White gui=none guifg=bg guibg=White
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"              Function Key maps                 "
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Re-source the default vimrc
+map <F2> :execute Clean_up()<CR> :source $HOME/.vimrc<CR>
+
+" C/C++ Programming 
+map <F3> :execute Clean_up()<CR> :execute Re_source("cpp_vimrc")<CR>
+
+" shell programming
+"map <F4> :execute Clean_up()<CR> :execute Re_source("bash_vimrc")<CR>
+
+" php programming
+"map <F5> :execute Clean_up()<CR> :execute Re_source("php-vimrc")<CR>
+
+" sgml editing
+"map <F6> :execute Clean_up()<CR> :execute Re_source("sgml-vimrc")<CR>
+
+" Once you invoke this you need to delete rows and type in the # you wish
+" to process
+"map <F11> :execute Dump_extra_whitespace(rows)
+
+" Reverse the background color
+"map <F12> :execute ReverseBackground()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""
+"              Custom functions                  "
+""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Re-source the rc files
+:function! Re_source(file_name)
+: let path_file_name = g:VIM_CUSTOM . a:file_name
+:  if filereadable(path_file_name)
+:  	execute 'source ' . path_file_name
+:  	echo path_file_name . " Loaded sucessfully"
+:  else
+:  	echo path_file_name . " does NOT exist"
+:  	return 0
+:  endif
+:endfunction
+
+" This function allows me to quickly remove extra tabs and whitespace
+" from the beginning of lines.  This seems to be a problem when I cut
+" and paste or when people don't use resizeable tabs.
+" TODO The only problem with this is after you execute it it jumps to the 
+" beginning of the file.  I need to figure out how to fix that.
+:function! Dump_extra_whitespace(rows)
+:	let com = ".,+" . a:rows . "s/^[ 	]*//g"
+:	execute com
+:endfunction
+
+" This function was created by Dillon Jones (much better than my first attempt)
+" it reverses the background color for switching between vim/gvim which have
+" different defaults.
+" TODO The only problem with this is after you execute it it jumps to the 
+" beginning of the file.  I need to figure out how to fix that.
+:function! ReverseBackground()
+: let Mysyn=&syntax
+: if &bg=="light"
+: se bg=dark
+: else
+: se bg=light
+: endif
+: syn on
+: exe "set syntax=" . Mysyn
+":   echo "now syntax is "&syntax
+:endfunction
+
+
+" Cleanup
+:function! Clean_up()
+:set visualbell&
+:set background&
+:set tabstop&
+:set showmatch&
+:set showcmd&
+:set autowrite&
+:endfunction

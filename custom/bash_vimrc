@@ -1,0 +1,64 @@
+:set visualbell			" Silence the bell, use a flash instead
+:set formatoptions=tcqor	" t=text, c=comments, q=format with gq command, o,r=autoinsert comment
+leader
+:set shiftwidth=4		" set shiftwidth to 4 spaces
+:set tabstop=4			" set tab to 4 spaces
+:set showmatch			" Show matching brackets/braces/parantheses.
+:set background=dark 		" set background to dark
+:set showcmd			" Show (partial) command in status line.
+:set autowrite			" Automatically save before commands like :next and :make
+:set textwidth=98		" My terminal is 98 characters wide
+:set ai					" set autoindent
+:syntax on
+"
+" Shell Programming 
+:map <F2> :execute Clean_up()<CR> :source $HOME/.vimrc<CR>
+:map <F3> gg:execute License_notice("bash_gpl_notice")<CR>dd18jO<ESC>
+:map <F4> ofor var in $list<ESC>odo<ESC>odone<ESC>koecho $var<ESC>I
+:map! <F4> for var in $list<ESC>odo<ESC>odone<ESC>koecho $var<ESC>I
+:map <F5> ofor((i=0;; i++)); <ESC>odo<ESC>odone<ESC>2kI<ESC>f;a<SPACE>
+:map! <F5> for((i=0;; i++)); <ESC>odo<ESC>odone<ESC>2kI<ESC>f;a<SPACE>
+:map <F6> owhile ;<ESC>odo<ESC>odone<ESC>2kI<ESC>f;i
+:map! <F6> while ;<ESC>odo<ESC>odone<ESC>2kI<ESC>f;i
+:map <F7> oif [ ]; then<ESC>ofi<ESC>kf[a<SPACE>
+:map! <F7> if [ ]; then<ESC>ofi<ESC>kf[a<SPACE>
+:map <F8> ocase $list in<CR>);;<CR>);;<CR>*);;<CR>^Desac<ESC>3kf)i
+:map! <F8> case $list in<CR>);;<CR>);;<CR>*);;<CR>^Desac<ESC>3kf)i
+:map <F9> oPS3='Prompt: '<ESC>oselect choice in $list<ESC>odo<ESC>oecho "Here's your choice:
+$choice"<CR>break<CR>done<ESC>4kf'l
+:map! <F9> PS3='Prompt: '<ESC>oselect choice in $list<ESC>odo<ESC>oecho "Here's your choice:
+$choice"<CR>break<CR>done<ESC>4kf'l
+
+
+:function! License_notice(file_name)
+: let path_file_name = g:VIM_CUSTOM . a:file_name
+:	execute 'r ' . path_file_name
+:endfunction
+
+" Cleanup
+:function! Clean_up()
+:set visualbell&
+:set formatoptions&
+:set shiftwidth&
+:set tabstop&
+:set showmatch&
+:set background&
+:set showcmd&
+:set autowrite&
+:set textwidth&
+:set ai&	
+:unmap <F3>
+:unmap! <F3>
+:unmap <F4>
+:unmap! <F4>
+:unmap <F5>
+:unmap! <F5>
+:unmap <F6>
+:unmap! <F6>
+:unmap <F7>
+:unmap! <F7>
+:unmap <F8>
+:unmap! <F8>
+:unmap <F9>
+:unmap! <F9>
+:endfunction

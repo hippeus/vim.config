@@ -1,0 +1,63 @@
+" Silence the bell, use a flash instead
+set visualbell	
+
+" :.5s = indent case statements 1/2 shiftwidth
+" >1s = indent 1 shiftwidth
+" p0 = indent function definitions 0 spaces
+" t0 = indent function return type 0 spaces
+" (0 = indent from unclosed parantheses
+" g2 = indent C++ scope resolution 2 spaces
+set cinoptions=:.5s,>1s,p0,t0,(0,g2
+
+" Which keywords should indent
+set	cinwords=if,else,while,do,for,switch,case
+
+set formatoptions=tcqor	" t=text, c=comments, q=format with "gq", o,r=autoinsert comment leader
+
+set cindent				" indent on cinwords
+set shiftwidth=4		" set shiftwidth to 4 spaces
+set tabstop=4			" set tab to 4 spaces
+set showmatch			" Show matching brackets/braces/parantheses.
+set background=dark 	" set background to dark
+set showcmd				" Show (partial) command in status line.
+set autowrite			" Automatically save before commands like :next and :make
+set textwidth=120		" My terminal is 98 characters wide
+syntax on
+
+" C Programming 
+map <F2> :execute Clean_up()<CR> :source $HOME/.vimrc<CR>
+map <F12> gg:execute License_notice("gc_license")<CR>dd18jO<ESC>
+map <F4> ofor(i=0;; i++) <CR>{<ESC>o}<ESC>kkI<ESC>f;a<SPACE>
+map! <F4> for(i;; i++) <CR>{<ESC>o}<ESC>kkI<ESC>f;a<SPACE>
+map <F5> owhile() {<ESC>o}<ESC>kI<ESC>f(a
+map! <F5> while() {<ESC>o}<ESC>kI<ESC>f(a
+map <F6> oif() {<ESC>o}<ESC>kf(a
+map! <F6> if() {<ESC>o}<ESC>kf(a
+map <F7> oswitch() {<ESC>ocase:<CR>break;<CR>case:<CR>break;<CR>default:<CR>}<ESC>6kf(a
+map! <F7> switch() {<ESC>ocase:<CR>break;<CR>case:<CR>break;<CR>default:<CR>}<ESC>6kf(a
+
+:function! License_notice(file_name)
+: let path_file_name = g:VIM_CUSTOM . a:file_name
+:  :execute 'r ' . path_file_name
+:endfunction
+
+" Cleanup
+function! Clean_up()
+set visualbell&
+set cinoptions&
+set cinwords&
+set formatoptions&
+set cindent&	
+set shiftwidth&
+set tabstop&
+set showmatch&
+set background&
+set showcmd&
+set autowrite&
+set textwidth&
+unmap <F4>
+unmap <F12>
+unmap <F5>
+unmap <F6>
+unmap <F7>
+endfunction
