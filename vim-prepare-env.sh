@@ -41,5 +41,5 @@ set_up_powerline_fonts(){
 	install_powerline_fonts ${current_dir}
 }
 
-#set_up_vundle ~/.vim
-#set_up_powerline_fonts `pwd`
+set_up_vundle ~/.vim
+set_up_powerline_fonts `pwd`

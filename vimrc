@@ -30,6 +30,20 @@ set bs=2     " make backspace behave like normal again
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
 
+" Syntax highlighting enables Vim to show parts of the text in another font or
+" color
+syntax enable
+
+" support for autoread/autoreaload file
+" auto-read won't happen if you do nothing some action must occur for details
+" see http://www.mail-archive.com/vim@vim.org/msg05900.html
+set autoread
+:map <F7> :checktime<CR>
+:map! <F7> <C-O>:checktime<CR>,,
+
+" this enables/disable "visual" wrapping
+set wrap
+" set nowrap
 
 " Bind nohl
 " Removes highlight of your last search
@@ -71,12 +85,6 @@ vnoremap <Leader>s :sort<CR>
 nmap <leader>ne :NERDTree<cr>
 map <leader>` <ESC>
 map! <leader>` <ESC>
-
-
-nmap <leader>ne :NERDTree<cr>
-map <leader>` <ESC>
-map! <leader>` <ESC>
-
 
 " easier moving of code blocks
 " Try to go into visual mode (v), thenselect several lines of code here and
@@ -140,6 +148,23 @@ set ignorecase
 set smartcase
 
 
+" Delete buffer while keeping window layout (don't close buffer's windows).
+" Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
+if v:version < 700 || exists('loaded_bclose') || &cp
+  finish
+endif
+let loaded_bclose = 1
+if !exists('bclose_multiple')
+  let bclose_multiple = 1
+endif
+
+" Display an error message.
+function! s:Warn(msg)
+  echohl ErrorMsg
+  echomsg a:msg
+  echohl NONE
+endfunction
+
 " Disable stupid backup and swap files - they trigger too many events
 " for file system watchers
 "" set nobackup
@@ -147,7 +172,7 @@ set smartcase
 "" set noswapfile
 
 " ============================================================================
-"									Vundle Setup
+" Vundle Setup
 " ============================================================================
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -220,11 +245,21 @@ map <silent> gf :YcmCompleter GoToDefinition<CR>
 " Python IDE Setup
 " ============================================================================
 
-" Settings for vim-powerline
-" cd ~/.vim/bundle
-" git clone git://github.com/Lokaltog/vim-powerline.git
-set laststatus=2
+" ============================================================================
+" Airline configuration - fancy powerline (status bar at buttom of the window)
+" ============================================================================
+set laststatus=2   " Always show the statusline
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_theme = 'murmur'
 
+
+" ============================================================================
+" Vim-gutter configuration - shows a git diff in a sign column
+" ============================================================================
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
 
 " Settings for ctrlp
 " cd ~/.vim/bundle
@@ -233,22 +268,6 @@ let g:ctrlp_max_height = 30
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
-
-
-" Settings for python-mode
-" Note: I'm no longer using this. Leave this commented out
-" and uncomment the part about jedi-vim instead
-" cd ~/.vim/bundle
-" git clone https://github.com/klen/python-mode
-"" map <Leader>g :call RopeGotoDefinition()<CR>
-"" let ropevim_enable_shortcuts = 1
-"" let g:pymode_rope_goto_def_newwin = "vnew"
-"" let g:pymode_rope_extended_complete = 1
-"" let g:pymode_breakpoint = 0
-"" let g:pymode_syntax = 1
-"" let g:pymode_syntax_builtin_objs = 0
-"" let g:pymode_syntax_builtin_funcs = 0
-"" map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Settings for jedi-vim
 " cd ~/.vim/bundle
@@ -274,7 +293,6 @@ set wildignore+=*/coverage/*
 
 "" inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
 "" inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
-
 
 " Python folding
 " mkdir -p ~/.vim/ftplugin
