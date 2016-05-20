@@ -5,6 +5,8 @@
 #
 # Distributed under terms of the MIT license.
 #
+youCompleteMeDir="$HOME/.vim/bundle/YouCompleteMe"
+
 create_directory(){
 	local path_to_directory=$1;
 	if [ -d ${path_to_directory} ]; then
@@ -41,5 +43,44 @@ set_up_powerline_fonts(){
 	install_powerline_fonts ${current_dir}
 }
 
+intall_vim_plugin(){
+	vim +PluginInstall +qall
+}
+
+compile_you_complete_me(){
+	local goSupport="--gocode-completer"
+	local cFamilySupport="--clang-completer"
+
+	pushd ${youCompleteMeDir}
+	echo "changing directory to ${youCompleteMeDir}"
+	./install.py ${cFamilySupport} ${goSupport}
+	popd
+	echo `pwd`
+}
+
+install_ycm_pre_requirements(){
+	sudo apt-get install build-essential cmake
+	sudo apt-get install python-dev python3-dev
+}
+
+install_ycm_extra_conf(){
+	local ycmCPPConfigFile="ycm_extra_conf.py"
+	if [ -e ${ycmCPPConfigFile} ]; then
+		create_directory ${youCompleteMeDir}/ycm_config_c++_skeleton
+		cp ${ycmCPPConfigFile} ${youCompleteMeDir}/ycm_config_c++_skeleton/
+	else
+		echo "skipping step: install ycm_extra_conf.py"
+	fi
+}
+
+install_you_complite_me(){
+	install_ycm_pre_requirements
+	compile_you_complete_me
+	install_ycm_extra_conf
+}
+
 set_up_vundle ~/.vim
 set_up_powerline_fonts `pwd`
+intall_vim_plugin
+install_you_complite_me
+echo $?
