@@ -244,31 +244,6 @@ map <silent> gf :YcmCompleter GoToDefinition<CR>
 " ============================================================================
 " Python IDE Setup
 " ============================================================================
-
-" ============================================================================
-" Airline configuration - fancy powerline (status bar at buttom of the window)
-" ============================================================================
-set laststatus=2   " Always show the statusline
-let g:airline_powerline_fonts=1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#mixed_indent_algo = 1
-let g:airline_theme = 'murmur'
-
-
-" ============================================================================
-" Vim-gutter configuration - shows a git diff in a sign column
-" ============================================================================
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
-
-" Settings for ctrlp
-" cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
-let g:ctrlp_max_height = 30
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
 " Settings for jedi-vim
 " cd ~/.vim/bundle
 " git clone git://github.com/davidhalter/jedi-vim.git
@@ -298,3 +273,40 @@ set wildignore+=*/coverage/*
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 "" set nofoldenable
+
+" ============================================================================
+" Airline configuration - fancy powerline (status bar at buttom of the window)
+" ============================================================================
+set laststatus=2   " Always show the statusline
+let g:airline_powerline_fonts=1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#whitespace#mixed_indent_algo = 1
+let g:airline_theme = 'murmur'
+
+
+" ============================================================================
+" Vim-gutter configuration - shows a git diff in a sign column
+" ============================================================================
+nmap ]h <Plug>GitGutterNextHunk
+nmap [h <Plug>GitGutterPrevHunk
+
+" Settings for ctrlp
+" cd ~/.vim/bundle
+" git clone https://github.com/kien/ctrlp.vim.git
+let g:ctrlp_max_height = 30
+set wildignore+=*.pyc
+set wildignore+=*_build/*
+set wildignore+=*/coverage/*
+
+map <C-Down> :bprevious<CR>
+map <C-Up> :bnext<CR>
+
+map <F4> :execute "silent lgrep! -srnw --binary-files=without-match --exclude-dir=.git --exclude="excluded_files" . -e " . expand("<cword>") . " " <bar> lopen 33<CR>
+
+map <C-t> :NERDTree .<CR>
+map <S-t> :TagbarToggle<CR>
+
+" Ctags configuration
+set tags=~/.vim/current_tags
+command Ctags execute "!ctags -R --tag-relative=yes --exclude=\".git|build\" -f "&tags"."
+nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
