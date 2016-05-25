@@ -287,10 +287,15 @@ let g:airline_theme = 'murmur'
 " ============================================================================
 " Vim-gutter configuration - shows a git diff in a sign column
 " ============================================================================
-nmap ]h <Plug>GitGutterNextHunk
-nmap [h <Plug>GitGutterPrevHunk
+" ]c jump to the next hunk
+" [c jump to the previous hunk
+" <leader>hp preview
+" <leader>hs stage
+" <leader>hu undo
 
+" ============================================================================
 " Settings for ctrlp
+" ============================================================================
 " cd ~/.vim/bundle
 " git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_max_height = 30
@@ -301,13 +306,16 @@ set wildignore+=*/coverage/*
 map <C-Down> :bprevious<CR>
 map <C-Up> :bnext<CR>
 
+" grep bindings
 let excluded_files=""
 map <F4> :execute "silent lgrep! -srnw --binary-files=without-match --exclude-dir=.git --exclude="excluded_files" . -e " . expand("<cword>") . " " <bar> lopen 33<CR>
 
 map <C-t> :NERDTree .<CR>
 map <S-t> :TagbarToggle<CR>
 
+" ============================================================================
 " Ctags configuration
+" ============================================================================
 set tags=~/.vim/current_tags
 command Ctags execute "!ctags -R --tag-relative=yes --exclude=\".git|build\" -f "&tags"."
 nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
