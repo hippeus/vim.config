@@ -80,9 +80,7 @@ map <Leader>m <esc>:tabnext<CR>
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
-" nerd tree mapping
 " remap <ESC> key
-nmap <leader>ne :NERDTree<cr>
 map <leader>` <ESC>
 map! <leader>` <ESC>
 
@@ -115,7 +113,7 @@ syntax on
 
 " Showing line numbers and length
 set number  " show line numbers
-set tw=79   " width of document (used by gd)
+set tw=120   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
 set colorcolumn=120
