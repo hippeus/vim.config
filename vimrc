@@ -66,16 +66,20 @@ inoremap <C-n> :nohl<CR>
 
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " Every unnecessary keystroke that can be saved is good for your health :)
-"" map <c-j> <c-w>j
-"" map <c-k> <c-w>k
-"" map <c-l> <c-w>l
-"" map <c-h> <c-w>h
+map <C-j> <c-w>j
+map <C-k> <c-w>k
+map <C-l> <c-w>l
+map <C-h> <c-w>h
 
+" easier navigation between tabs
+map <Leader>n :tabprevious<CR>
+map <Leader>m :tabnext<CR>
+map <C-Left> :tabprevious<CR>
+map <C-Right> :tabnext<CR>
 
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-
+" easier navigation between buffers
+map <C-Down> :bprevious<CR>
+map <C-Up> :bnext<CR>
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
@@ -301,9 +305,6 @@ let g:ctrlp_max_height = 30
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
-
-map <C-Down> :bprevious<CR>
-map <C-Up> :bnext<CR>
 
 " grep bindings
 let excluded_files=""
