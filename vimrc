@@ -240,6 +240,7 @@ let g:ycm_filetype_whitelist = {
 let g:ycm_error_symbol = '*'
 map <silent> gd :YcmCompleter GoToDeclaration<CR>
 map <silent> gf :YcmCompleter GoToDefinition<CR>
+map <silent> gi :YcmCompleter GoToInclude<CR>
 
 " ============================================================================
 " Python IDE Setup
