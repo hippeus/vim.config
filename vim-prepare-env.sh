@@ -43,7 +43,7 @@ set_up_powerline_fonts(){
 	install_powerline_fonts ${current_dir}
 }
 
-intall_vim_plugin(){
+install_vim_plugins(){
 	vim +PluginInstall +qall
 }
 
@@ -81,6 +81,6 @@ install_you_complite_me(){
 
 set_up_vundle ~/.vim
 set_up_powerline_fonts `pwd`
-intall_vim_plugin
+install_vim_plugins
 install_you_complite_me
 echo $?
