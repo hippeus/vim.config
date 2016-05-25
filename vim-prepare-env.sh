@@ -79,6 +79,13 @@ install_you_complite_me(){
 	install_ycm_extra_conf
 }
 
+install_vim(){
+	sudo apt-get install vim-gnome
+	local vimrc="vimrc"
+	cp ${vimrc} ${HOME}/.${vimrc}
+}
+
+install_vim
 set_up_vundle ~/.vim
 set_up_powerline_fonts `pwd`
 install_vim_plugins
