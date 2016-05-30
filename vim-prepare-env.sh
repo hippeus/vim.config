@@ -61,6 +61,8 @@ compile_you_complete_me(){
 install_ycm_pre_requirements(){
 	sudo apt-get install build-essential cmake
 	sudo apt-get install python-dev python3-dev
+	sudo apt-get install golang
+	sudo apt-get install ninja-build
 }
 
 install_ycm_extra_conf(){
