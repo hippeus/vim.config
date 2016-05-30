@@ -310,8 +310,16 @@ set wildignore+=*/coverage/*
 let excluded_files=""
 map <F4> :execute "silent lgrep! -srnw --binary-files=without-match --exclude-dir=.git --exclude="excluded_files" . -e " . expand("<cword>") . " " <bar> lopen 33<CR>
 
+" ============================================================================
+" NERDTree configuration
+" ============================================================================
 map <C-t> :NERDTree .<CR>
 map <S-t> :TagbarToggle<CR>
+
+" When you <S-t> on some entry in a NerdTree window it will open in a new window
+" which will be placed it tap just after current window, this function substitute
+" default setting to place new tab at the end of windows queue.
+autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 
 " ============================================================================
 " Ctags configuration
