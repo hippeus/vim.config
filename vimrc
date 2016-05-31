@@ -47,10 +47,9 @@ set wrap
 
 " Bind nohl
 " Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+noremap <Leader>n :nohl<CR>
+vnoremap <Leader>n :nohl<CR>
+inoremap <Leader>n :nohl<CR>
 
 
 " Quicksave command
@@ -63,8 +62,8 @@ inoremap <C-n> :nohl<CR>
 "" noremap <Leader>e :quit<CR>  " Quit current window
 "" noremap <Leader>E :qa!<CR>   " Quit all windows
 
-
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
+" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
 " Every unnecessary keystroke that can be saved is good for your health :)
 map <C-j> <c-w>j
 map <C-k> <c-w>k
@@ -72,8 +71,8 @@ map <C-l> <c-w>l
 map <C-h> <c-w>h
 
 " easier navigation between tabs
-map <Leader>n :tabprevious<CR>
-map <Leader>m :tabnext<CR>
+map <C-n> :tabprevious<CR>
+map <C-m> :tabnext<CR>
 map <C-Left> :tabprevious<CR>
 map <C-Right> :tabnext<CR>
 
