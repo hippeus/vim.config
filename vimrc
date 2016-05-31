@@ -71,8 +71,6 @@ map <C-l> <c-w>l
 map <C-h> <c-w>h
 
 " easier navigation between tabs
-map <C-n> :tabprevious<CR>
-map <C-m> :tabnext<CR>
 map <C-Left> :tabprevious<CR>
 map <C-Right> :tabnext<CR>
 
