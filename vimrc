@@ -65,10 +65,22 @@ inoremap <Leader>n :nohl<CR>
 " bind Ctrl+<movement> keys to move around the windows, instead of using Ctrl+w + <movement>
 " ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
 " Every unnecessary keystroke that can be saved is good for your health :)
-map <C-j> <c-w>j
-map <C-k> <c-w>k
-map <C-l> <c-w>l
-map <C-h> <c-w>h
+map <A-j> <c-w>j
+map <A-k> <c-w>k
+map <A-l> <c-w>l
+map <A-h> <c-w>h
+"
+let c='a'
+while c <= 'z'
+    exec "set <A-".c.">=\e".c
+    exec "imap \e".c." <A-".c.">"
+    let c = nr2char(1+char2nr(c))
+endw
+
+set timeout ttimeoutlen=50
+"
+map <C-l> :tabnext<CR>
+map <C-h> :tabprevious<CR>
 
 " easier navigation between tabs
 map <C-Left> :tabprevious<CR>
@@ -237,6 +249,7 @@ let g:ycm_filetype_whitelist = {
       \ 'go' : 1
 	\}
 let g:ycm_error_symbol = '*'
+let g:ycm_collect_identifiers_from_tags_files = 1
 map <silent> gd :YcmCompleter GoToDeclaration<CR>
 map <silent> gf :YcmCompleter GoToDefinition<CR>
 map <silent> gi :YcmCompleter GoToInclude<CR>
