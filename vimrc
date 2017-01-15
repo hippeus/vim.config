@@ -211,6 +211,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'fatih/vim-go'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'SirVer/ultisnips' " Ultimate Snippet manager (engine)
 Plugin 'honza/vim-snippets' " Snippets for ultisnips
 Plugin 'AndrewRadev/splitjoin.vim'
