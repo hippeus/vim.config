@@ -1,7 +1,3 @@
-" Sample .vimrc file by Martin Brochhaus
-" Presented at PyCon APAC 2012
-
-
 " ============================================
 " Note to myself:
 " DO NOT USE <C-z> FOR SAVING WHEN PRESENTING!
@@ -29,10 +25,6 @@ set bs=2     " make backspace behave like normal again
 " I like to have it here becuase it is easier to reach than the default and
 " it is next to ``m`` and ``n`` which I use for navigating between tabs.
 let mapleader = ","
-
-" Syntax highlighting enables Vim to show parts of the text in another font or
-" color
-syntax enable
 
 " support for autoread/autoreaload file
 " auto-read won't happen if you do nothing some action must occur for details
@@ -219,10 +211,17 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'fatih/vim-go'
+Plugin 'SirVer/ultisnips' " Ultimate Snippet manager (engine)
+Plugin 'honza/vim-snippets' " Snippets for ultisnips
+Plugin 'AndrewRadev/splitjoin.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+" Syntax highlighting enables Vim to show parts of the text in another font or
+" color
+syntax enable		    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -337,3 +336,42 @@ autocmd BufNew * if winnr('$') == 1 | tabmove99 | endif
 set tags=~/.vim/current_tags
 command Ctags execute "!ctags -R --tag-relative=yes --exclude=\".git|build\" -f "&tags"."
 nnoremap <C-]> <Esc>:exe "ptjump " . expand("<cword>")<Esc>
+
+" ============================================================================
+" UltiSnips configuration
+" ============================================================================
+" Make UltiSnips compatible with the YCM by picking snippet from context menu
+" with the Return key
+let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+function ExpandSnippetOrCarriageReturn()
+    let snippet = UltiSnips#ExpandSnippetOrJump()
+    if g:ulti_expand_or_jump_res > 0
+	return snippet
+    else
+	return "\<CR>"
+    endif
+endfunction
+inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
+" ============================================================================
+" Golang configuration
+" ============================================================================
+" run :GoBuild or :GoTestCompile based on the go file
+map <C-n> :cnext<CR>
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#cmd#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
+
