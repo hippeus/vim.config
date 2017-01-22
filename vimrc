@@ -121,7 +121,7 @@ set number  " show line numbers
 set tw=120   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=120
+set colorcolumn=140
 highlight ColorColumn ctermbg=233
 
 
@@ -210,8 +210,8 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'fatih/vim-go'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips' " Ultimate Snippet manager (engine)
 Plugin 'honza/vim-snippets' " Snippets for ultisnips
 Plugin 'AndrewRadev/splitjoin.vim'
@@ -310,7 +310,6 @@ let g:airline_theme = 'murmur'
 " Settings for ctrlp
 " ============================================================================
 " cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
 let g:ctrlp_max_height = 30
 set wildignore+=*.pyc
 set wildignore+=*_build/*
