@@ -375,4 +375,20 @@ autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
 autocmd FileType go nmap <leader>r <Plug>(go-run)
 autocmd FileType go nmap <Leader>c <Plug>(go-coverage-toggle)
 
+" sets golang "formater" to goimports which handles missing packages and fix syntax
 let g:go_fmt_command = "goimports"
+
+" enable enhanced highlights for go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+
+" useful shortcuts
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')  " runs :GoAlternate
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit') " opens a new vertical split with the alternate file
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split') " opens a new horizontal split with the alternate file
+autocmd Filetype go command! -bang AT call go#alternate#Switch(<bang>0, 'tabe') " the same but opens file in a new tab
+
+autocmd FileType go nmap <Leader>i <Plug>(go-info) " execute :GoInfo which prints func signature in a status line
+let g:go_auto_type_info = 1 " automatically runs :GoInfo for indentifier under cursor
