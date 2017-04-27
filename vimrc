@@ -108,7 +108,6 @@ au InsertLeave * match ExtraWhitespace /\s\+$/
 set t_Co=256
 color wombat256mod
 
-
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
 filetype off
@@ -150,6 +149,16 @@ set incsearch
 set ignorecase
 set smartcase
 
+" Make split opening more natural
+set splitbelow
+set splitright
+" useful split command
+" Swap top/bottom or left/right split
+"	Ctrl+W R
+" Break out current window into a new tabview
+"	Ctrl+W T
+" Close every window in the current tabview but the current one
+"	Ctrl+W o
 
 " Delete buffer while keeping window layout (don't close buffer's windows).
 " Version 2008-11-18 from http://vim.wikia.com/wiki/VimTip165
