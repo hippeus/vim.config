@@ -98,15 +98,14 @@ vnoremap > >gv  " better indentation
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
+"autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+" autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 
 
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 " wget -O wombat256mod.vim http://www.vim.org/scripts/download_script.php?src_id=13400
 set t_Co=256
-color wombat256mod
 
 " Enable syntax highlighting
 " You need to reload this file for the change to apply
@@ -224,6 +223,7 @@ Plugin 'fatih/vim-go'
 Plugin 'SirVer/ultisnips' " Ultimate Snippet manager (engine)
 Plugin 'honza/vim-snippets' " Snippets for ultisnips
 Plugin 'AndrewRadev/splitjoin.vim'
+Plugin 'vim-scripts/ShowTrailingWhitespace'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
