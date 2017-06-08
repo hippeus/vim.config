@@ -74,9 +74,7 @@ install_vim_plugins(){
 }
 
 install_you_complite_me(){
-	echo "kurwa"
 	install_ycm_pre_requirements
-	echo "kurwa"
 	compile_you_complete_me
 	install_ycm_extra_conf
 }
