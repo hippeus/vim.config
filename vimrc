@@ -15,6 +15,8 @@
 set pastetoggle=<F2>
 ""set clipboard=unnamed
 
+"redraw screen
+:map <F5> :redraw!<CR>
 
 " Mouse and backspace
 set mouse=a  " on OSX press ALT and click
